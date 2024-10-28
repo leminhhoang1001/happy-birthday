@@ -6,7 +6,6 @@ const musicOff = '<i class="fas fa-volume-xmark"></i>';
 const messagelist = [
     "Count your life by smiles, not tears. Count your age by friends, not years.",
     "I hope all your birthday wishes and dreams come true.",
-    "A wish for you on your birthday, whatever you ask may you receive, whatever you seek may you find, whatever you wish may it be fulfilled on your birthday and always.",
     "May the joy that you have spread in the past come back to you on this day.",
     "Your life is just about to pick up speed and blast off into the stratosphere. Wear a seat belt and be sure to enjoy the journey.",
     "Forget the past; look forward to the future, for the best things are yet to come.",
