@@ -20,7 +20,7 @@ function updateCountdown() {
         const hours = String(duration.hours()).padStart(2, '0');
         const minutes = String(duration.minutes()).padStart(2, '0');
         const seconds = String(duration.seconds()).padStart(2, '0');
-        countdown.textContent = `${days}d ${hours}:${minutes}:${seconds}`;
+        countdown.textContent = `${days}d ${hours} : ${minutes} : ${seconds} `;
     }
 }
 
@@ -30,6 +30,12 @@ const interval = setInterval(updateCountdown, 1000);
 // Chạy hàm lần đầu
 updateCountdown();
 
+//kiểm tra hỗ trợ backdrop-fillter
+const supportsBackdropFillter = CSS.supports('backdrop-fillter', 'blur(50px') ||
+    CSS.supports('-webkit-backdrop-fillter', 'blur(50px)');
+if (!supportsBackdropFillter) {
+    overlay.classList.add('fallback');
+}
 
 const card = document.getElementById('card')
 const tapHint = document.getElementById('tap-hint')

@@ -43,10 +43,15 @@ body {
     height: 100%;
     background: rgba(161, 169, 182, 0.377);
     backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 99999;
+}
+
+.overlay.fallback {
+    background: rgba(161, 169, 182, 0.575);
 }
 
 .overlay .countdown {
