@@ -1,3 +1,36 @@
+dayjs.extend(window.dayjs_plugin_duration);
+// Khởi tạo thời gian đích
+const targetDate = dayjs('2025-01-12T00:00:00'); // Thay đổi thành ngày bạn muốn
+const overlay = document.getElementById('overlay');
+const countdown = document.querySelector('.countdown');
+
+// Hàm cập nhật đếm ngược
+function updateCountdown() {
+    const now = dayjs();
+    const diff = targetDate.diff(now);
+
+    if (diff <= 0) {
+        // Đã đến thời gian mở khóa
+        overlay.classList.add('hidden');
+        clearInterval(interval);
+    } else {
+        // Hiển thị thời gian còn lại
+        const duration = dayjs.duration(diff);
+        const days = String(Math.floor(duration.asDays())).padStart(2, '0');
+        const hours = String(duration.hours()).padStart(2, '0');
+        const minutes = String(duration.minutes()).padStart(2, '0');
+        const seconds = String(duration.seconds()).padStart(2, '0');
+        countdown.textContent = `${days}d ${hours}:${minutes}:${seconds}`;
+    }
+}
+
+// Cập nhật đếm ngược mỗi giây
+const interval = setInterval(updateCountdown, 1000);
+
+// Chạy hàm lần đầu
+updateCountdown();
+
+
 const card = document.getElementById('card')
 const tapHint = document.getElementById('tap-hint')
 let id;
