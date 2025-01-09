@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Grape+Nuts');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&display=swap');
 * {
     box-sizing: border-box;
 }
@@ -219,8 +220,8 @@ body {
 
 .greeting-content {
     color: #3d3d3d;
-    font: normal 5vmin 'Caveat';
-    font-weight: 700;
+    font: normal 5vmin 'Oooh Baby';
+    font-weight: 800;
     letter-spacing: 0.1vmin;
     word-wrap: break-word;
     text-overflow: ellipsis;
