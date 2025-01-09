@@ -57,7 +57,7 @@ body {
 .overlay .countdown {
     position: fixed;
     color: rgb(245, 247, 255);
-    font-size: 15vmin;
+    font-size: 12vmin;
     text-align: center;
     font-family: "Oooh Baby";
     font-weight: 600;
