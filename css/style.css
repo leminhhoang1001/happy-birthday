@@ -98,13 +98,20 @@ body {
 .path {
     stroke: rgba(3, 3, 3, 0.95);
     stroke-width: 4;
-    stroke-dasharray: 100vmin;
-    stroke-dashoffset: 100vmin;
+    stroke-dasharray: 1000px;
+    stroke-dashoffset: 1000px;
+    will-change: stroke-dashoffset;
     animation: draw 1.5s infinite forwards normal linear;
     -webkit-animation: draw 1.5s infinite forwards normal linear;
-    animation-delay: 0.1s;
-    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.5s;
+    -webkit-animation-delay: 0.5s;
     position: relative;
+}
+
+@-webkit-keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 @keyframes draw {
