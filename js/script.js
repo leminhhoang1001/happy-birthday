@@ -12,7 +12,9 @@ function updateCountdown() {
     if (diff <= 0) {
         // Đã đến thời gian mở khóa
         overlay.classList.add('hidden');
-        clearInterval(interval);
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 500)
     } else {
         // Hiển thị thời gian còn lại
         const duration = dayjs.duration(diff);
@@ -25,7 +27,12 @@ function updateCountdown() {
 }
 
 // Cập nhật đếm ngược mỗi giây
-const interval = setInterval(updateCountdown, 1000);
+const interval = setInterval(() => {
+    updateCountdown();
+    if (overlay.classList.contains('hidden')) {
+        clearInterval(interval);
+    }
+}, 1000);
 
 // Chạy hàm lần đầu
 updateCountdown();
