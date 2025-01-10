@@ -24,7 +24,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient( #fffff0, #afa393);
+    background: radial-gradient( #494949, #1a1a24);
     perspective: 250vmin;
     height: auto;
     flex-direction: column;
@@ -66,6 +66,13 @@ body {
 
 .overlay.hidden {
     display: none;
+}
+
+canvas {
+    filter: blur(1px);
+    position: fixed;
+    display: block;
+    /* z-index: 9999999; */
 }
 
 .card {
