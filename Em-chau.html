@@ -17,10 +17,19 @@
 </head>
 
 <body>
-    <div class="overlay active hidden" id="overlay">
+    <div class="overlay active" id="overlay">
         <div class="countdown">
             00:00:00
         </div>
+        <!-- /* From Uiverse.io by Alderx */ -->
+        <div class="heartbeatloader">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 400" height="100%" width="100%" class="svgdraw">
+                <path stroke="black" stroke-width="4" fill="transparent" d="M 0 200 l 40 0 l 5 -40 l 5 40 l 10 0 l 5 15 l 10 -140 l 10 220 l 5 -95 l 10 0 l 5 20 l 5 -20 l 30 0" class="path"></path>
+            </svg>
+            <div class="innercircle"></div>
+            <div class="outercircle"></div>
+        </div>
+
     </div>
     <canvas id="canvas"></canvas>
     <div class="card" id="card">
