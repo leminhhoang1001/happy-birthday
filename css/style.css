@@ -101,7 +101,9 @@ body {
     stroke-dasharray: 100vmin;
     stroke-dashoffset: 100vmin;
     animation: draw 1.5s infinite forwards normal linear;
+    -webkit-animation: draw 1.5s infinite forwards normal linear;
     animation-delay: 0.1s;
+    -webkit-animation-delay: 0.1s;
     position: relative;
 }
 
