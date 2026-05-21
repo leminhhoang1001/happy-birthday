@@ -1,6 +1,6 @@
 dayjs.extend(window.dayjs_plugin_duration);
 // Khởi tạo thời gian đích
-const targetDate = dayjs('2025-01-12T00:00:00'); // Thay đổi thành ngày bạn muốn
+const targetDate = dayjs('2026-05-22T00:00:00'); // Thay đổi thành ngày bạn muốn
 const overlay = document.getElementById('overlay');
 const countdown = document.querySelector('.countdown');
 
