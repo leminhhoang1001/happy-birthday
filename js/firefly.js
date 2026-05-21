@@ -27,7 +27,10 @@ class firefly {
 let f = [];
 
 function draw() {
-    if (f.length < 100) {
+    const MAX_FIREFLIES =
+    window.innerWidth < 768 ? 35 : 100;
+
+    if (f.length < MAX_FIREFLIES) {
         for (let j = 0; j < 10; j++) {
             f.push(new firefly());
         }

@@ -1,6 +1,7 @@
 dayjs.extend(window.dayjs_plugin_duration);
 // Khởi tạo thời gian đích
 const targetDate = dayjs('2026-05-22T00:00:00'); // Thay đổi thành ngày bạn muốn
+// const targetDate = dayjs().add(30, 'second'); 
 const overlay = document.getElementById('overlay');
 const countdown = document.querySelector('.countdown');
 
@@ -38,9 +39,9 @@ const interval = setInterval(() => {
 updateCountdown();
 
 //kiểm tra hỗ trợ backdrop-fillter
-const supportsBackdropFillter = CSS.supports('backdrop-fillter', 'blur(50px') ||
-    CSS.supports('-webkit-backdrop-fillter', 'blur(50px)');
-if (!supportsBackdropFillter) {
+const supportsBackdropFilter = CSS.supports('backdrop-filter', 'blur(50px') ||
+    CSS.supports('-webkit-backdrop-filter', 'blur(50px)');
+if (!supportsBackdropFilter) {
     overlay.classList.add('fallback');
 }
 
@@ -50,8 +51,35 @@ let id;
 const button = document.getElementById('muteaudio');
 const musicOn = '<i class="fas fa-volume-high"></i>';
 const musicOff = '<i class="fas fa-volume-xmark"></i>';
+const assets = [
+    './img/cake.gif',
+    './audio/Romantic-Happy-Birthday.mp3'
+];
+
+assets.forEach(asset => {
+    const link = document.createElement('link');
+
+    link.rel = 'preload';
+
+    if (asset.endsWith('.mp3')) {
+        link.as = 'audio';
+    } else {
+        link.as = 'image';
+    }
+
+    link.href = asset;
+
+    document.head.appendChild(link);
+});
 let lastIndex = -1; // Lưu chỉ mục tin nhắn trước đó
 let messagelist = [];
+let currentIndex = 0;
+let typedInstance = null;
+const isMobile = window.innerWidth < 768;
+const prevBtn = document.getElementById('prevMessage');
+const nextBtn = document.getElementById('nextMessage');
+
+
 // const messagelist = [
 //     "Count your life by smiles, not tears. Count your age by friends, not years.",
 //     "I hope all your birthday wishes and dreams come true.",
@@ -67,6 +95,7 @@ const muteSound = new Howl({
     // mute: false,
     // autoplay:true,
     loop: true,
+    preload: true,
     html5: true,
     volume: 1
 });
@@ -93,6 +122,91 @@ function getSecureRandomIndex(max) {
     return array[0] % max; // Lấy phần dư để đảm bảo trong khoảng 0 đến max - 1
 }
 
+function applyAutoFontSize(message) {
+    const messageContainer = document.querySelector('.greeting-content');
+
+    messageContainer.classList.remove(
+        'size-large',
+        'size-medium',
+        'size-small',
+        'size-xsmall'
+    );
+
+    const length = message.length;
+
+    if (length < 120) {
+        messageContainer.classList.add('size-large');
+    } else if (length < 220) {
+        messageContainer.classList.add('size-medium');
+    } else if (length < 320) {
+        messageContainer.classList.add('size-small');
+    } else {
+        messageContainer.classList.add('size-xsmall');
+    }
+}
+
+function renderMessage(index) {
+    const messageContainer = document.querySelector('.greeting-content');
+
+    if (!messagelist[index]) return;
+
+
+
+    messageContainer.style.opacity = 0;
+    messageContainer.style.transform = 'translateY(1vmin)';
+
+    setTimeout(() => {
+        if (typedInstance) {
+            typedInstance.destroy();
+        }
+        messageContainer.innerHTML = '';
+
+        applyAutoFontSize(messagelist[index]);
+
+        typedInstance = new Typed('.greeting-content', {
+            strings: [messagelist[index]],
+            typeSpeed: isMobile ? 28 : 45,
+            startDelay: 200,
+            showCursor: true,
+            smartBackspace: false,
+            fadeOut:false,
+            shuffle:false,
+            cursorChar: '❤'
+        });
+
+        // fade in
+        requestAnimationFrame(() => {
+            messageContainer.style.opacity = 1;
+            messageContainer.style.transform = 'translateY(0)';
+        });
+
+    }, 400);
+                // disable button khi tới đầu/cuối
+        prevBtn.classList.toggle('disabled', index === 0);
+        nextBtn.classList.toggle(
+            'disabled',
+            index === messagelist.length - 1
+        );
+}
+
+document.getElementById('nextMessage').addEventListener('click', (e) => {
+    e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài card
+
+    if (currentIndex < messagelist.length - 1) {
+        currentIndex++;
+        renderMessage(currentIndex);
+    }
+});
+
+document.getElementById('prevMessage').addEventListener('click', (e) => {
+    e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài card
+
+    if (currentIndex > 0) {
+        currentIndex--;
+        renderMessage(currentIndex);
+    }
+});
+
 // Sự kiện lật thiệp
 card.addEventListener('click', function(e) {
     e.preventDefault();
@@ -108,26 +222,8 @@ card.addEventListener('click', function(e) {
             }
 
             // Chọn câu chúc ngẫu nhiên
-            let random;
-            do {
-                random = getSecureRandomIndex(messagelist.length);
-            } while (random === lastIndex); // Đảm bảo không lặp lại liên tiếp
-
-            lastIndex = random; // Cập nhật chỉ mục mới
-            const message = messagelist[random];
-
-            // Xóa nội dung cũ trước khi hiển thị câu chúc mới
-            const messageContainer = document.querySelector('.greeting-content');
-            if (messageContainer) {
-                messageContainer.innerHTML = ''; // Xóa nội dung cũ
-            }
-
-            // Hiển thị câu chúc mới
-            new Typed('.greeting-content', {
-                strings: [message],
-                typeSpeed: 60,
-                showCursor: false
-            });
+            currentIndex = 0;
+            renderMessage(currentIndex);
         }, 600); // Thời gian trễ để khớp với hiệu ứng lật
     }
 });

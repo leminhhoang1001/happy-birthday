@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="preload" as="image" href="./img/cake.gif">
+    <link rel="preload" as="audio" href="./audio/Romantic-Happy-Birthday.mp3">
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/duration.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/utc.js"></script>
@@ -17,7 +19,7 @@
 </head>
 
 <body>
-    <div class="overlay active hidden" id="overlay">
+    <div class="overlay" id="overlay">
         <div class="countdown">
             00:00:00
         </div>
@@ -43,29 +45,33 @@
         <div class="card-face card-back">
             <div class="card-content">
                 <div class="greeting-top">22.05.2026</div>
-                <div class="greeting-center">Happy Birthday!</div>
+                <div class="greeting-center">written with love</div>
                 <div class="greeting-message">
-                    <p class="greeting-content" id="wish">
-                        <!-- example -->
-                        <!-- For you at Christmas time: A wish for happiness, warmth, and love. -->
-                    </p>
+                    <div class="greeting-content-wrapper">
+                        <div class="greeting-content" id="wish">
+                            <!-- example -->
+                            <!-- For you at Christmas time: A wish for happiness, warmth, and love. -->
+                        </div>
+                    </div>
+                    <div class="message-navigation">
+                        <div class="nav-text" id="prevMessage">
+                            ← quay lại
+                        </div>
+                        <div class="nav-text" id="nextMessage">
+                            đọc tiếp →
+                        </div>                    
+                    </div>
                 </div>
-                <div class="greeting-from-to">
-                    <p>
-                        From:<br />
-                        <strong>Your Lover</strong>,<br />
-                    </p>
-                    <p>
-                        To:<br />
-                        <strong>My Princess</strong>,<br />
-                    </p>
+                <div class="signature">
+                    always yours,
+                    <strong>Lucas</strong>
                 </div>
             </div>
         </div>
     </div>
     <div class="footer">
         <p>
-            © 2023 Luc4sL3e
+            made with love by Lucas
         </p>
     </div>
     <div id="snow"></div>
