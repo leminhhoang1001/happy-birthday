@@ -171,7 +171,7 @@ function renderMessage(index) {
             smartBackspace: false,
             fadeOut:false,
             shuffle:false,
-            cursorChar: '❤'
+            cursorChar: '❤️'
         });
 
         // fade in
